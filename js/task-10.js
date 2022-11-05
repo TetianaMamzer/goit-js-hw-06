@@ -9,30 +9,33 @@ const refs = {
   boxes: document.querySelector('#boxes'),
 
 };
-
+let array = [];
+const basicSize = 30;
  function createBoxes (amount) {
-  const basicSize = 30;
+array = [];
+if (amount === 0) {
+  return;
+} else {
+  for (let i = 0; i < amount; i += 1) {
+    const boxList = document.createElement("div");
+    const size = basicSize + i * 10;
+  
+    boxList.style.cssText = `width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}`;
+    array.push(boxList);
+  }
+};
 
-for (let i = 0; i <= amount; i += 1) {
-  const boxList = document.createElement("div");
-  const size = basicSize + i * 10;
-
-  boxList.style.cssText = `width: ${size}px; height: ${size}px; background-color: ${getRandomHexColor()}`;
-  refs.boxes.appendChild(boxList);
-}
  };
 
- function onInputSum (e) {
-  let number = 0;
-  number = Number(e.currentTarget.value);
-  createBoxes(number);
-}
-
+ function create() {
+createBoxes(Number(refs.input.value));
+return refs.boxes.append(...array);
+ };
 
  function destroyBoxes(e) {
   refs.boxes.textContent = '';
 }
 
 refs.destroy.addEventListener('click', destroyBoxes);
-refs.create.addEventListener('click', createBoxes);
-refs.input.addEventListener('input', onInputSum);
+refs.create.addEventListener('click', create);
+
