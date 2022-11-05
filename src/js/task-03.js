@@ -12,3 +12,25 @@ const images = [
     alt: 'Group of Horses Running',
   },
 ];
+
+const gallaryCreate = options => {
+  return options.map(image => {
+    const gallaryImg = document.createElement('img');
+    gallaryImg.src = image.url;
+    gallaryImg.alt = image.alt;
+    return gallaryImg;
+  });
+};
+console.log(gallaryCreate);
+
+const el = gallaryCreate(images);
+const galleryMake = make => {
+  return make.map(list => {
+    const galleryList = document.createElement('li');
+    galleryList.append(list);
+    return galleryList;
+  });
+};
+const elements = galleryMake(el);
+const gallaryGroup = document.querySelector('.gallery');
+gallaryGroup.append(...elements);
